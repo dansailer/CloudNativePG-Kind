@@ -3,52 +3,42 @@
 ## Setup Minikube on Mac
 
 ```sh
-brew install minikube kubectl beekeeper-studio
+brew install minikube helm kubectl beekeeper-studio
 minikube start
 kubectl get po -A
 minikube dashboard
 ```
 
-## Setup simple PostgreSQL
+# Setup Bitnami PostgreSQL with Helm
+
+PostgreSQL instance will be accessible within cluster with DNS `pg-minikube-postgresql.default.svc.cluster.local` and to make it accessible from the outside use `kubectl port-forward`.
+
 
 ```sh
-kubectl apply -f 1_simple/postgres-deploy.yaml
-kubectl get all
-minikube service postgres
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm install pg-minikube --set auth.postgresPassword=<your-postgres-password> bitnami/postgresql
+kubectl get pods -n default -o wide
+kubectl port-forward --namespace default svc/pg-minikube-postgresql 5432:5432 &
 ```
 
-After opening a tunnel to the `postgres` service, open your SQL DB management tool - e.g. Beekeeper Studio or SQLElectron - and connect using the provided port from the URL and the credentials from the deployment yaml.
 
-```
-Host: localhost
-Port: 51045  (use from minikube service postgres output)
-User: root
-Password: REDACTED
-Default Database: mydb
-```
-
-## Setup simple PGAdmin
+# Setup PGAdmin with Helm
 
 ```sh
-kubectl apply -f 1_simple/pgadmin-deploy.yaml
-kubectl get all
-minikube service pgadmin
+helm repo add runix https://helm.runix.net
+helm install pgadmin4 runix/pgadmin4  --set env.password=<your-pgadmin-password>  --set env.email=admin@example.com
+export POD_NAME=$(kubectl get pods --namespace default -l "app.kubernetes.io/name=pgadmin4,app.kubernetes.io/instance=pgadmin4" -o jsonpath="{.items[0].metadata.name}")
+kubectl port-forward $POD_NAME 8080:80
+open http://localhost:8080
 ```
 
-Login using the credentials from the deployment yaml.
+Login using the credentials used previously. Configure the connection for `pgAdmin` using these 
 
 ```
-User: admin@admin.com
-Password: REDACTED
-```
-
-Configure the connection for `pgAdmin` to run locally
-
-```
-Host: 192.168.49.2
-Port: 30432
-User: root
-Password: REDACTED
-Maintenance Database: mydb
+Host: pg-minikube-postgresql.default.svc.cluster.local
+Port: 5432
+User: postgres
+Password: <your-postgres-password>
+Maintenance Database: postgres
 ```
 
