@@ -1,4 +1,4 @@
-# EnterpriseDB Operator Workshop
+# CloudNativePG Operator Demo
 
 ## Install dependencies
 
