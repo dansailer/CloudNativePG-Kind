@@ -146,7 +146,7 @@ echo "Login credentials are: minioRoot / ${MINIO_ROOT_PASSWORD}"
 open https://minio.127.0.0.1.nip.io/
 ```
 
-For simplicity reasons, auto-generated self signed certificates are used with the ingress controller. You will have to trust that certificate when accessing with your browser. Click on "visit this website". Use the credentials that were written in the shell window (minioRoot / ...)
+For simplicity reasons, auto-generated self signed certificates are used with the ingress controller. You will have to trust that certificate when accessing with your browser. Click on "visit this website". Use the credentials that were written in the shell window (minioRoot / ...) when accessing [Minio](https://minio.127.0.0.1.nip.io/)
 
 ![Visit website](images/003_visit_website.png)
 ![Visit website](images/003_minio_login.png)
@@ -171,6 +171,10 @@ echo "Login credentials are: admin / ${GRAFANA_ADMIN_PASSWORD}"
 open https://grafana.127.0.0.1.nip.io/d/cloudnative-pg/cloudnativepg
 open https://prometheus.127.0.0.1.nip.io/
 ```
+
+For simplicity reasons, auto-generated self signed certificates are used with the ingress controller. You will have to trust that certificate again when accessing with your browser. Click on "visit this website". Use the credentials that were written in the shell window (admin / ...) when accessing [Grafana](https://grafana.127.0.0.1.nip.io/d/cloudnative-pg/cloudnativepg)
+
+![Visit website](images/004_grafana_login.png)
 
 ## Preload images to speedup demo
 
