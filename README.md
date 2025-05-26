@@ -4,7 +4,7 @@
 
 Use your package manager to install kind, kubectl, kubectl-cnpg, k9s and sqlelectron.
 Then we create a quick script that will write secrets in an `.env` file that can be sourced
-for secrets.
+for later use.
 
 ```sh
 brew install kind derailed/k9s/k9s kubectl-cnpg helm kubectl sqlelctron tmus watch
@@ -54,6 +54,8 @@ helm repo add cnpg-grafana https://cloudnative-pg.github.io/grafana-dashboards
 helm repo add stable https://charts.helm.sh/stable
 helm repo update
 
+docker pull ghcr.io/cloudnative-pg/postgresql:16.4
+docker pull ghcr.io/cloudnative-pg/postgresql:16.6
 ```
 
 ## Setup Kubernetes Cluster with kind
