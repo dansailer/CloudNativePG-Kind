@@ -146,9 +146,7 @@ echo "Login credentials are: minioRoot / ${MINIO_ROOT_PASSWORD}"
 open https://minio.127.0.0.1.nip.io/
 ```
 
-![Minio Pods started](images/003_minio_running.png)
-
-For simplicity reasons, auto-generated self signed certificates are used with the ingress controller. You will have to trust that certificate when accessing with your browser. Click on "visit this website".
+For simplicity reasons, auto-generated self signed certificates are used with the ingress controller. You will have to trust that certificate when accessing with your browser. Click on "visit this website". Use the credentials that were written in the shell window (minioRoot / ...)
 
 ![Visit website](images/003_visit_website.png)
 ![Visit website](images/003_minio_login.png)
