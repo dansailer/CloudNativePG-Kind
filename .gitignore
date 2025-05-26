@@ -1,0 +1,5 @@
+# Ignore .env file with secrets or config variables
+.env
+
+# Ignore downloaded dependencies
+cloud-provider-kind
